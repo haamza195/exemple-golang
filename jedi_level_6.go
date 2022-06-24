@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	fmt.Println("Jedi Level 06 Exercises.")
@@ -26,6 +29,43 @@ func main() {
 		age:        27,
 	}
 	a_04.infos_01()
+	//Exercise_05
+	fmt.Println("Exercise 05\n")
+	a_05 := circle{
+		radius: 6.898123,
+	}
+	a_06 := square_01{
+		lenght: 20,
+		width:  30,
+	}
+	fmt.Printf("The area of circle is %v\n", a_05.area())
+	fmt.Printf("The area of the square is %v \n", a_06.area())
+	//Exercise_06
+	fmt.Println("Exercise 06 - Annonymous func\n")
+	a_07 := func(n int) int {
+		return n * (n - 1)
+	}
+	fmt.Printf("The annonymous func is %v\n", a_07(5))
+	//Exercise_08
+	fmt.Println("Exercise 08\n")
+	fmt.Printf("The returned func value is %v \n", ret(5))
+	//Exercise_09
+	fmt.Println("Exercise 09\n")
+	volume_of_circle_02 := func(radius float64) float64 {
+		return math.Pi * (radius * radius)
+	}
+	area_02(volume_of_circle_02)
+	//Exercise_10
+	fmt.Println("Exercise 10 \n")
+	nextseq := seq()
+	fmt.Printf("Closure value is :: %v\n", nextseq())
+	fmt.Printf("Closure value is :: %v\n", nextseq())
+	fmt.Printf("Closure value is :: %v\n", nextseq())
+	fmt.Printf("Closure value is :: %v\n", nextseq())
+	fmt.Printf("Closure value is :: %v\n", nextseq())
+	fmt.Println("Resetting...\n")
+	newseq := seq()
+	fmt.Printf("Closure value is :: %v", newseq())
 }
 
 //Exercise_01 ( SUCCESS)
@@ -66,3 +106,56 @@ func (a infos) infos_01() {
 	fmt.Printf("Your last name is :%v\n", a.last_name)
 	fmt.Printf("Your current age is :%v\n", a.age)
 }
+
+//Exercise_05(SUCCESS)
+type circle struct {
+	radius float64
+}
+type square_01 struct {
+	lenght float64
+	width  float64
+}
+
+func (c circle) area() float64 {
+	return math.Pi * (c.radius * c.radius)
+
+}
+func (s square_01) area() float64 {
+	return s.lenght * s.width
+
+}
+
+type shape interface {
+	area()
+}
+
+func area_circ(pi shape) {
+	pi.area()
+}
+
+//Exercise_06(SUCCES - LOOK AT MAIN FUNC)--------------------------------------------------------------------------------------------------------------------------------
+//Exercise_07(FAILED.)
+//Exercise_08 (INCLUDING EXERCISE_11)
+func ret(n int) int {
+	if n == 0 {
+		return 1
+	} else {
+		return n * ret(n-1)
+	}
+}
+
+//Exercise_09(SUCCESS)
+func area_02(volume_01 func(radius float64) float64) {
+	fmt.Printf("The volume area of the second circle is %v\n", volume_01(7.897912))
+}
+
+//Exercise_10(SUCCESS)
+func seq() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
+}
+
+//Summary -- I still need more practices over in order to learn func and master it.
